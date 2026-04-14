@@ -1,0 +1,12 @@
+<h1>Olá, bom dia!</h1>
+<p>Olá, {{user.name}} {{user.surname}}!</p>
+
+{{#if auth}}
+  <p>Usuário autenticado.</p>
+{{else}}
+  <p>Usuário não autenticado.</p>
+{{/if}}
+
+<a href="/voltar">
+  Voltar
+</a>
