@@ -1,0 +1,107 @@
+<h1>Editando o usuário: {{user.name}}</h1>
+
+<form action="/users/update/{{user.id}}" method="POST" class="form">
+  <input type="hidden" name="id" value="{{user.id}}" />
+
+  <div class="form-control">
+    <label for="name">Nome:</label>
+    <input
+      value="{{user.name}}"
+      type="text"
+      id="name"
+      name="name"
+      placeholder="Digite o nome do usuário"
+      required
+    />
+  </div>
+
+  <div class="form-control">
+    <label for="occupation">Profissão:</label>
+    <input
+      value="{{user.occupation}}"
+      type="text"
+      id="occupation"
+      name="occupation"
+      placeholder="Digite a profissão do usuário"
+      required
+    />
+  </div>
+
+  <div class="form-control form-checkbox">
+    {{#if user.newsletter}}
+      <input type="checkbox" id="newsletter" name="newsletter" checked />
+    {{else}}
+      <input type="checkbox" id="newsletter" name="newsletter" />
+    {{/if}}
+
+    <label for="newsletter">Enviar promoções?</label>
+  </div>
+
+  <button type="submit">Cadastrar</button>
+</form>
+
+<div class="address-container">
+  <h2>Endereços:</h2>
+
+  <form action="/address/create" method="POST" class="form">
+    <input type="hidden" name="UserId" value="{{user.id}}" />
+
+    <div class="form-control">
+      <label for="street">Rua:</label>
+      <input
+        type="text"
+        id="street"
+        name="street"
+        placeholder="Digite a rua"
+        required
+      />
+    </div>
+
+    <div class="form-control">
+      <label for="number">Número:</label>
+      <input
+        type="text"
+        id="number"
+        name="number"
+        placeholder="Digite o número da residência"
+        required
+      />
+    </div>
+
+    <div class="form-control">
+      <label for="city">Cidade:</label>
+      <input
+        type="text"
+        id="city"
+        name="city"
+        placeholder="Digite a cidade"
+        required
+      />
+    </div>
+
+    <button type="submit">Incluir Endereço</button>
+  </form>
+
+  <div class="address-list">
+    <h2>Lista de endereços:</h2>
+
+    {{#if user.Addresses.length}}
+      <div class="address-itens">
+        {{#each user.Addresses}}
+          <div class="address-item">
+            <p>#{{id}} - {{street}}, {{number}} - {{city}}</p>
+
+            <form action="/address/delete" method="POST">
+              <input type="hidden" name="UserId" value="{{userId}}" />
+              <input type="hidden" name="id" value="{{this.id}}" />
+
+              <button type="submit" class="delete-btn">Remover</button>
+            </form>
+          </div>
+        {{/each}}
+      </div>
+    {{else}}
+      <p>Este usuário ainda não possui endereços cadastrados.</p>
+    {{/if}}
+  </div>
+</div>
