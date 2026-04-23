@@ -1,0 +1,31 @@
+<h1>Atualizar uma task</h1>
+
+<form action="/tasks/update/{{task.id}}" method="POST">
+  <input type="hidden" name="id" value="{{task.id}}" />
+
+  <div class="form-control">
+    <label for="title">Título:</label>
+
+    <input
+      type="text"
+      id="title"
+      name="title"
+      placeholder="O que você vai fazer?"
+      value="{{task.title}}"
+    />
+  </div>
+
+  <div class="form-control">
+    <label for="description">Descrição:</label>
+
+    <textarea
+      id="description"
+      name="description"
+      placeholder="O que você vai fazer?"
+    >{{task.description}}</textarea>
+  </div>
+
+  <div class="form-control">
+    <button type="submit">Atualizar tarefa</button>
+  </div>
+</form>
